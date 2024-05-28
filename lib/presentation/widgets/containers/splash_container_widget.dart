@@ -32,10 +32,9 @@ class SplashContainerWidget extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: CustomButtonAtom(
-                    onClick: () {
-                      CustomRoute()
-                          .navigate(context, ScreensItemModel.loginScreen);
-                    },
+                    isEnable: true,
+                    onClick: () => CustomRoute.navigate(
+                        context, ScreensItemModel.loginScreen),
                     text: 'Iniciar sesión',
                     textStyle: const TextStyle(
                         fontSize: 18,
@@ -52,10 +51,9 @@ class SplashContainerWidget extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: CustomButtonAtom(
-                    onClick: () {
-                      CustomRoute()
-                          .navigate(context, ScreensItemModel.signUpScreen);
-                    },
+                    isEnable: true,
+                    onClick: () => CustomRoute.navigate(
+                        context, ScreensItemModel.signUpScreen),
                     text: 'Registrate',
                     textStyle: const TextStyle(
                         fontSize: 18,

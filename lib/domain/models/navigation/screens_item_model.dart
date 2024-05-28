@@ -1,7 +1,6 @@
 enum ScreensItemModel {
   splashScreen,
-  homeScreen,
-  catalogScreen,
+  mainScreen,
   checkoutScreen,
   detailScreen,
   loginScreen,
