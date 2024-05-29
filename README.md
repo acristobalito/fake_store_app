@@ -1,12 +1,10 @@
 # Aplicación e-commerce
 
-Un pequeño proyecto desarrollado en Flutter empleando POO, Provider para la gestion de estados y navigator.  
+Desarrollado en Flutter empleando POO, Provider para la gestion de estados y navigator.  
 
 El presente proyecto consume 2 paquetes publicados en GitHub:  
 * [ecommerce_widgets_package](https://github.com/acristobalito/ecommerce_widgets_package), empleado para el desarrollo de interfaces de la aplicación
 * [fake_api_source_package](https://github.com/acristobalito/fake_api_source_package), empleado para el consumo de la API [FakeStoreApi](https://fakestoreapi.com/)
-
-El proyecto esta enfocado en la plataforma movil con soporte a ambos SO (Android y iOS), el cual contienen un CRUD basado en el videojuego de antaño Dragon City.  
   
 En esta primera fase no se cuenta con test unitarios
 
@@ -36,7 +34,7 @@ Se requiere la version mínima de flutter `3.22.0`.
 
 ## Documentación
 A continuación se menciona las 3 pantallas de la aplicación:  
-+ Vista de carga (Pantalla principal):
++ __Vista de carga (Pantalla principal):__
   En esta vista principal observaremos una bienvenida con 2 opciones para acceder a la app, loggeandose con una cuenta existente, o registrandose.
     
   **Nota:**  Para acceder a la app se recomienda ingresar con los siguientes accesos:
@@ -45,20 +43,20 @@ A continuación se menciona las 3 pantallas de la aplicación:
     
   La API de registro, no permite logear con las credenciales registradas.
     
-+ Vista de loggeo:
++ __Vista de loggeo:__
 		En esta pantalla podremos encontrar dos cajas de texto y un botón de ingreso.  
   * Botón Ingresar: Al interactuar con este botón, si los campos no han sido ingresados, se mostrara una alerta en las cajas de texto indicando que estan vacíos, en caso de que no esten vacíos, se consumira la API de logeo, si en caso la API responde satisfactorio, se mostrara la pantalla principal de la apliación.
       
-+ Vista de registro:
++ __Vista de registro:__
 		En esta pantalla podremos encontrar un formulario que contiene una validación de campos vacíos, y un botón de registro. Al interactuar con este botón, consumiremos la API de registro mediante el cual enviaremos la información ingresada para el registro. Es importante resaltar que el servicio por alguna razón no recibe las credenciales creadas en esta vista para el loggeo. Para acceder a la app se recomienda loggearte con las credenciales brindadas previamente.
 
-+ Vista principal:
-    * Página inicio
-    * Página catálogo
-+ Vista de busqueda:
-+ Vista de soporte y contacto:
-+ Vista de detalle del producto
-+ Vista del carrito
++ __Vista principal:__ En esta pantalla observaremos inicialmente una pagina de inicio, y una barra de navegación en la parte inferior de la pantalla. Adicionalmente, en la barra superior encontraremos una barra de busqueda y un icono de carrito junto a la cantidad de productos agregados al carrito.
+    * __Página inicio:__ En esta página encontraremos dos banners que represetan la inaguración de la tienda y los descuentos correspondientes, (los cuales aun no cuentan con una navegación momentaneamente). Adicional a ello contamos con dos carruseles de productos, los cuales muestran como maximo 5 items por cara carrusel. Finalmente, contamos con un botón flotante el cual redirge a la vista de soporte y contacto.
+    * __Página catálogo:__ En esta página veremos una lista de todos los productos, junto a una lista desplegable de categorias por las cuales filtrar. Si se selecciona la categoria todas, se muestra todos los productos de la API.
++ __Vista de busqueda:__ A esta vista se acccede al dar tap sobre la barra de busqueda de la vista principal, en esta vista de igual manera encontraremos una lista de todos los productos, junto a una barra de busqueda la cual con cada entrada de texto se realiza y filtra los productos coincidentes.
++ __Vista de soporte y contacto:__ En esta vista encontramos la información del desarrollador junto a la información de contactos.
++ __Vista de detalle del producto:__ En esta vista observaremos todos los detalles del producto seleccionado, y un boton con el texto `Agregar producto`, el cual servira para añadir al carrito el producto. Si encuentra el producto en el carrito, el texto del botón cambia a `Agregar otro producto`.
++ __Vista del carrito:__ En esta vista veremos un listado con todos los productos agregados previamente, y un control de unidades junto a un boton eliminar producto. Cuando se ajusta las unidades de los productos del carrito, y se regresa a las vistas previas, estas unidades se veran reflejadas en el texto del icono del carrito. Observaremos adicionalmente una sección de **Total** el cual calcula el precio por unidades de cada producto. Finalmente un boton de **comprar**, el cual por temas académicos elimina toda la lista de productos del carrito y muestra un toast de agradecimiento por la compra.
 
 **NOTA:** Los productos que se añaden al carrito, se almancenan en el dispositivo empleando la libreria de SharedPreferences codificando el objeto a una cadena de texto, y para leer la información decodificamos el string al modelo del carrito. El modelo empleado en el carrito es `List<CartAppModel>`.  
 
