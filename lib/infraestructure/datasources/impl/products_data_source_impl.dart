@@ -9,14 +9,15 @@ class ProductsDataSourceImpl implements ProductsDataSource {
   Future<List<ProductModel>?> getProducts() async {
     final response = await catalog.getAllProducts();
     return response.fold(
-      (l) => null,
-      (r) => r,
+      (onError) => null,
+      (products) => products,
     );
   }
 
   @override
   Future<List<String>?> getCategories() async {
     final response = await catalog.getAllCategories();
-    return response.fold((l) => null, (r) => r.categories);
+    return response.fold((onError) => null,
+        (responseCategories) => responseCategories.categories);
   }
 }

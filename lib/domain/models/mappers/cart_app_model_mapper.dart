@@ -10,8 +10,9 @@ class CartAppModelMapper {
       price: json["price"],
       quantity: json["quantity"]);
 
-  static List<CartAppModel>? orderFormFromJson(String? value) => (value != null)
-      ? List<CartAppModel>.from(jsonDecode(value).map((x) => _cartFromJson(x)))
+  static List<CartAppModel>? orderFormFromJson(String? json) => (json != null)
+      ? List<CartAppModel>.from(
+          jsonDecode(json).map((jsonCart) => _cartFromJson(jsonCart)))
       : null;
 
   static Map<String, dynamic> _cartToJson(CartAppModel cart) => {

@@ -10,6 +10,7 @@ class MainScreenProvider extends ChangeNotifier {
   final getOrderFormUseCase = GetOrderFormUseCase();
   List<ProductModel>? products;
   List<ProductModel>? categoriesProducts;
+  List<ProductModel>? searchedProducts;
   List<ProductModel>? recommendedForYouProducts;
   List<ProductModel>? newSectionsProducts;
   List<String> categories = ['Todas'];
@@ -33,6 +34,7 @@ class MainScreenProvider extends ChangeNotifier {
   void _getProducts() async {
     products = await getProductsUseCase.invoke();
     categoriesProducts = products;
+    searchedProducts = products;
     notifyListeners();
     _getRecommendedForYouProducts(products);
     _getNewSectionProducts(products);
@@ -73,5 +75,9 @@ class MainScreenProvider extends ChangeNotifier {
     categoriesProducts =
         getProductsUseCase.filterProductFromCategory(products, category);
     notifyListeners();
+  }
+
+  List<ProductModel> searchProduct(String? keyWord) {
+    return getProductsUseCase.searchProduct(products, keyWord);
   }
 }

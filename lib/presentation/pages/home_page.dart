@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = context.watch<MainScreenProvider>();
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: SingleChildScrollView(
         child: Column(
           children: [

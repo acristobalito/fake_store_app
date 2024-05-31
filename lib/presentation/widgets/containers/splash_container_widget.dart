@@ -8,66 +8,84 @@ class SplashContainerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          const CustomTextAtom(
-            lines: 2,
-            text: 'Bienvenido a Fake Store',
-            style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: TokenColors.scale06),
+    return SafeArea(
+      child: Expanded(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: CustomTextAtom(
+                  lines: 2,
+                  text: 'Bienvenido...',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: TokenColors.scale01),
+                ),
+              ),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: CustomTextAtom(
+                  lines: 2,
+                  text: '¿Listo para para una experiencia interesate?',
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: CustomButtonAtom(
+                  isEnable: true,
+                  onClick: () => CustomRoute.navigate(
+                      context, ScreensItemModel.loginScreen),
+                  text: 'Iniciar sesión',
+                  textStyle: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: FoundationTypo.font,
+                      fontWeight: FontWeight.bold),
+                  btnStyle: const ButtonStyle(
+                      backgroundColor:
+                          WidgetStatePropertyAll(TokenColors.scale00)),
+                ),
+              ),
+              const Align(
+                alignment: Alignment.center,
+                child: CustomTextAtom(
+                  lines: 2,
+                  text: 'ó',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: CustomButtonAtom(
+                  isEnable: true,
+                  onClick: () => CustomRoute.navigate(
+                      context, ScreensItemModel.signUpScreen),
+                  text: 'Registrate',
+                  textStyle: const TextStyle(
+                      fontSize: 18,
+                      fontFamily: FoundationTypo.font,
+                      fontWeight: FontWeight.bold),
+                  btnStyle: const ButtonStyle(
+                      backgroundColor:
+                          WidgetStatePropertyAll(TokenColors.scale05)),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 50,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: CustomButtonAtom(
-                    isEnable: true,
-                    onClick: () => CustomRoute.navigate(
-                        context, ScreensItemModel.loginScreen),
-                    text: 'Iniciar sesión',
-                    textStyle: const TextStyle(
-                        fontSize: 18,
-                        fontFamily: FoundationTypo.font,
-                        fontWeight: FontWeight.bold),
-                    btnStyle: const ButtonStyle(
-                        backgroundColor:
-                            WidgetStatePropertyAll(TokenColors.scale03)),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: CustomButtonAtom(
-                    isEnable: true,
-                    onClick: () => CustomRoute.navigate(
-                        context, ScreensItemModel.signUpScreen),
-                    text: 'Registrate',
-                    textStyle: const TextStyle(
-                        fontSize: 18,
-                        fontFamily: FoundationTypo.font,
-                        fontWeight: FontWeight.bold),
-                    btnStyle: const ButtonStyle(
-                        backgroundColor:
-                            WidgetStatePropertyAll(TokenColors.scale06)),
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
+        ),
       ),
     );
   }

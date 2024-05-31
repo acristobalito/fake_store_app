@@ -3,6 +3,7 @@ import 'package:fake_store_app/config/navigation/custom_route.dart';
 import 'package:fake_store_app/domain/models/mappers/product_app_model_mapper.dart';
 import 'package:fake_store_app/domain/models/navigation/screens_item_model.dart';
 import 'package:fake_store_app/domain/provider/main_screen_provider.dart';
+import 'package:fake_store_app/presentation/delegates/search_product_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,16 +14,38 @@ class CatalogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = context.watch<MainScreenProvider>();
     return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: CatalogViewWidgetTemplate(
-        isEnable: provider.categories.length > 1,
-        products:
-            ProductAppModelMapper.mapProductsModel(provider.categoriesProducts),
-        categories: provider.categories,
-        onProductClicked: (product) => CustomRoute.navigate(
-            context, ScreensItemModel.detailScreen,
-            product: product),
-        onCategorySelected: (category) => provider.filterProduct(category),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          CustomTextFieldAtom(
+            /* onTapContainer: () => CustomRoute.navigate(
+                context, ScreensItemModel.searchScreen,
+                products: provider.products), */
+            onTapContainer: () =>
+                showSearch(context: context, delegate: SearchProductDelegate()),
+            onChangeValue: (value) {},
+            hintText: 'Busca un producto',
+            keyBoardType: TextInputType.text,
+            readOnly: true,
+            prefixIcon: const Icon(Icons.search_rounded),
+          ),
+          Expanded(
+            child: CatalogViewWidgetTemplate(
+              isEnable: provider.categories.length > 1,
+              products: ProductAppModelMapper.mapProductsModel(
+                  provider.categoriesProducts),
+              categories: provider.categories,
+              onProductClicked: (product) => CustomRoute.navigate(
+                  context, ScreensItemModel.detailScreen,
+                  product: product),
+              onCategorySelected: (category) =>
+                  provider.filterProduct(category),
+            ),
+          ),
+        ],
       ),
     );
   }

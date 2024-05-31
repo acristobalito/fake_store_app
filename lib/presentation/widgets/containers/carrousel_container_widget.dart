@@ -14,7 +14,7 @@ class CarrouselContainerWidget extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: products.length,
-        itemBuilder: (context, index) => CardItemMolecule(
+        itemBuilder: (_, index) => CardItemMolecule(
             product: products[index],
             onClick: () => onProductClicked.call(products[index])),
       ),

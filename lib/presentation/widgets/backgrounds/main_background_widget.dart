@@ -10,7 +10,7 @@ class MainBackgroundWidget extends StatelessWidget {
       children: [
         const ImageAtom(
           image:
-              'https://static.vecteezy.com/system/resources/previews/004/931/492/non_2x/mobile-phone-represent-of-front-of-shop-store-shopping-online-on-website-or-mobile-application-concept-marketing-and-digital-marketing-free-vector.jpg',
+              'https://as2.ftcdn.net/v2/jpg/04/95/91/57/1000_F_495915779_LGPZOO29dAYZuSA8AHgyUm0BRXSM23iG.jpg',
           boxFit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,
@@ -18,7 +18,7 @@ class MainBackgroundWidget extends StatelessWidget {
         Container(
           width: double.infinity,
           height: double.infinity,
-          color: Colors.white.withOpacity(0.6),
+          color: Colors.black.withOpacity(0.6),
         ),
       ],
     );

@@ -17,42 +17,55 @@ class LoginContainerWidget extends StatelessWidget {
         CustomToastWidget(context: context);
     return SafeArea(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            IconButton(
+          Align(
+            alignment: Alignment.centerLeft,
+            child: IconButton(
                 onPressed: () => CustomRoute.backNavigate(context),
                 icon: const IconAtom(
                   icon: Icons.arrow_back_ios_rounded,
                   size: 30,
-                  colorIcon: TokenColors.scale06,
+                  colorIcon: TokenColors.scale00,
                 )),
-            const CustomTextAtom(
-              lines: 2,
-              text: 'Inicia sesión',
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: TokenColors.scale06),
-            ),
-            const SizedBox()
-          ]),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: LoginFormWidgetTemplate(
-              isLoading: provider.isLoading,
-              textStyle: const TextStyle(
-                  fontSize: 18,
-                  fontFamily: FoundationTypo.font,
-                  fontWeight: FontWeight.w500),
-              btnStyle: const ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(TokenColors.scale06)),
-              onSubmit: (submit) => provider.logginUser(
-                submit.userName,
-                submit.pass,
-                onSuccess: () => CustomRoute.navigateAndRemoveUntil(
-                    context, ScreensItemModel.mainScreen),
-                onFailure: (message) => toastController.showToast(message),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: CustomTextAtom(
+                      lines: 2,
+                      text:
+                          'Para acceder debes ingresar tu usuario y contraseña.',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  LoginFormWidgetTemplate(
+                    colorIcon: Colors.white,
+                    textStyleForm: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                    isLoading: provider.isLoading,
+                    textStyle: const TextStyle(
+                        fontSize: 18,
+                        fontFamily: FoundationTypo.font,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                    btnStyle: const ButtonStyle(
+                        backgroundColor:
+                            WidgetStatePropertyAll(TokenColors.scale00)),
+                    onSubmit: (submit) => CustomRoute.navigateAndRemoveUntil(
+                        context, ScreensItemModel.mainScreen),
+                  ),
+                ],
               ),
             ),
           )
