@@ -1,10 +1,10 @@
-import 'package:fake_api_source_package/fake_api_source_package.dart';
 import 'package:fake_api_source_package/infrastructure/repositories/repositories.dart';
 import 'package:fake_store_app/domain/models/user/user_params_model.dart';
+import 'package:fake_store_app/domain/use_cases/user/register_user_use_case.dart';
 import 'package:flutter/material.dart';
 
 class SignUpProvider extends ChangeNotifier {
-  final userCatalog = FakeApiSourcePackage();
+  final registerUseCase = RegisterUserUseCase();
   bool isLoading = false;
 
   void registerUser(UserParamsModel user,
@@ -23,11 +23,10 @@ class SignUpProvider extends ChangeNotifier {
             zipcode: '123-456',
             geolocation: GeolocationModel(lat: '-12.123', long: '80.0000')),
         phone: user.phone);
-    final request = await userCatalog.registerUser(params);
-    request.fold(
-      (l) => onFailure.call(l.message),
-      (r) => onSuccess.call(),
-    );
+    final request = await registerUseCase.invoke(params);
+    request != null
+        ? onSuccess.call()
+        : onFailure.call('Ops!, ocurrio un error durante el registro');
     _setLoading(false);
   }
 

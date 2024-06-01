@@ -1,7 +1,7 @@
 import 'package:fake_api_source_package/infrastructure/repositories/repositories.dart';
-import 'package:fake_store_app/domain/use_cases/get_categories_use_case.dart';
-import 'package:fake_store_app/domain/use_cases/get_order_form_use_case.dart';
-import 'package:fake_store_app/domain/use_cases/get_products_use_case.dart';
+import 'package:fake_store_app/domain/use_cases/products/get_categories_use_case.dart';
+import 'package:fake_store_app/domain/use_cases/cart/get_order_form_use_case.dart';
+import 'package:fake_store_app/domain/use_cases/products/get_products_use_case.dart';
 import 'package:flutter/material.dart';
 
 class MainScreenProvider extends ChangeNotifier {

@@ -71,10 +71,10 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "7c13165722b0f02727a6c217e216fa3147cb6a9d"
+      resolved-ref: a3db972782860ab09eec73804f255921d856767b
       url: "https://github.com/acristobalito/fake_api_source_package"
     source: git
-    version: "0.0.4"
+    version: "0.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -194,6 +194,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.0"
+  mocktail:
+    dependency: transitive
+    description:
+      name: mocktail
+      sha256: c4b5007d91ca4f67256e720cb1b6d704e79a510183a12fa551021f652577dce6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   nested:
     dependency: transitive
     description:

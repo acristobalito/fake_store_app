@@ -1,5 +1,5 @@
 import 'package:fake_api_source_package/domain/model/product_model.dart';
-import 'package:fake_store_app/domain/use_cases/get_products_use_case.dart';
+import 'package:fake_store_app/domain/use_cases/products/get_products_use_case.dart';
 import 'package:flutter/material.dart';
 
 class SearchProvider extends ChangeNotifier {

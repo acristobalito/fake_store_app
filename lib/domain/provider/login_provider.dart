@@ -1,21 +1,20 @@
-import 'package:fake_api_source_package/fake_api_source_package.dart';
 import 'package:fake_api_source_package/infrastructure/repositories/repositories.dart';
+import 'package:fake_store_app/domain/use_cases/user/login_user_use_case.dart';
 import 'package:flutter/material.dart';
 
 class LoginProvider extends ChangeNotifier {
-  final userCatalog = FakeApiSourcePackage();
+  final loginUseCase = LoginUserUseCase();
   bool isLoading = false;
 
   void logginUser(String userName, String password,
       {required VoidCallback onSuccess,
       required Function(String) onFailure}) async {
     _setLoading(true);
-    final request = await userCatalog
-        .loginUser(LoginParamsModel(username: userName, password: password));
-    request.fold(
-      (l) => onFailure.call(l.message),
-      (r) => onSuccess.call(),
-    );
+    final request = await loginUseCase
+        .invoke(LoginParamsModel(username: userName, password: password));
+    request != null
+        ? onSuccess.call()
+        : onFailure.call('Ups! ocurrio un error en el loggeo');
     _setLoading(false);
   }
 

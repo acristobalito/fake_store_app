@@ -1,7 +1,7 @@
 import 'package:ecommerce_widgets_package/domain/model/cart_widget_model.dart';
 import 'package:fake_store_app/domain/models/cart/cart_app_model.dart';
-import 'package:fake_store_app/domain/use_cases/get_order_form_use_case.dart';
-import 'package:fake_store_app/domain/use_cases/update_oder_form_use_case.dart';
+import 'package:fake_store_app/domain/use_cases/cart/get_order_form_use_case.dart';
+import 'package:fake_store_app/domain/use_cases/cart/update_oder_form_use_case.dart';
 import 'package:flutter/material.dart';
 
 class CheckoutProvider extends ChangeNotifier {
