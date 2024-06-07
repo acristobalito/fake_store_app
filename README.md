@@ -6,7 +6,7 @@ El presente proyecto consume 2 paquetes publicados en GitHub:
 * [ecommerce_widgets_package](https://github.com/acristobalito/ecommerce_widgets_package), empleado para el desarrollo de interfaces de la aplicación
 * [fake_api_source_package](https://github.com/acristobalito/fake_api_source_package), empleado para el consumo de la API [FakeStoreApi](https://fakestoreapi.com/)
   
-En esta primera fase no se cuenta con test unitarios
+El proyecto ya cuenta con tests unitarios, widget tests y tests de integración. 🚀
 
 # Tabla de contenidos
 1. [Introducción](#introduction)
