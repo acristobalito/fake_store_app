@@ -8,11 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CatalogPage extends StatelessWidget {
-  const CatalogPage({super.key});
+  final MainScreenProvider mainScreenProvider;
+  const CatalogPage({super.key, required this.mainScreenProvider});
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<MainScreenProvider>();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
@@ -26,23 +26,25 @@ class CatalogPage extends StatelessWidget {
                 products: provider.products), */
             onTapContainer: () =>
                 showSearch(context: context, delegate: SearchProductDelegate()),
-            onChangeValue: (value) {},
+            onChangeValue: (value) => null,
             hintText: 'Busca un producto',
             keyBoardType: TextInputType.text,
             readOnly: true,
             prefixIcon: const Icon(Icons.search_rounded),
           ),
           Expanded(
-            child: CatalogViewWidgetTemplate(
-              isEnable: provider.categories.length > 1,
-              products: ProductAppModelMapper.mapProductsModel(
-                  provider.categoriesProducts),
-              categories: provider.categories,
-              onProductClicked: (product) => CustomRoute.navigate(
-                  context, ScreensItemModel.detailScreen,
-                  product: product),
-              onCategorySelected: (category) =>
-                  provider.filterProduct(category),
+            child: Consumer<MainScreenProvider>(
+              builder: (context, _, child) => CatalogViewWidgetTemplate(
+                isEnable: mainScreenProvider.categories.length > 1,
+                products: ProductAppModelMapper.mapProductsModel(
+                    mainScreenProvider.categoriesProducts),
+                categories: mainScreenProvider.categories,
+                onProductClicked: (product) => CustomRoute.navigate(
+                    context, ScreensItemModel.detailScreen,
+                    product: product),
+                onCategorySelected: (category) =>
+                    mainScreenProvider.filterProduct(category),
+              ),
             ),
           ),
         ],

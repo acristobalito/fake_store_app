@@ -9,54 +9,67 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainContainerWidget extends StatelessWidget {
-  const MainContainerWidget({super.key});
+  final MainScreenProvider mainScreenProvider;
+  const MainContainerWidget({super.key, required this.mainScreenProvider});
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<MainScreenProvider>();
-    final List<Widget> pageList = [const HomePage(), const CatalogPage()];
-    return Scaffold(
-        drawer: const CustomDrawerWidget(),
-        appBar: AppBar(
-          leading: Builder(builder: (context) {
-            return Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: GestureDetector(
-                onTap: () => Scaffold.of(context).openDrawer(),
-                child: const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://www.nicepng.com/png/detail/136-1366211_group-of-10-guys-login-user-icon-png.png'),
-                ),
-              ),
-            );
-          }),
-          centerTitle: true,
-          title: const CustomTextAtom(
-            text: 'Fake Store',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+    mainScreenProvider.getData();
+    final List<Widget> pageList = [
+      HomePage(
+        mainScreenProvider: mainScreenProvider,
+      ),
+      CatalogPage(
+        mainScreenProvider: mainScreenProvider,
+      )
+    ];
+    return Consumer<MainScreenProvider>(
+      builder: (context, _, child) => Scaffold(
+          drawer: const CustomDrawerWidget(),
+          appBar: AppBar(
+            leading: Builder(builder: (context) {
+              return Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: GestureDetector(
+                    onTap: () => Scaffold.of(context).openDrawer(),
+                    child: const CircleAvatar(
+                      backgroundColor: FoundationColors.primaryColor,
+                      child: IconAtom(
+                        icon: Icons.person_rounded,
+                        size: 35,
+                        colorIcon: Colors.white,
+                      ),
+                    ),
+                  ));
+            }),
+            centerTitle: true,
+            title: const CustomTextAtom(
+              text: 'Fake Store',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            actions: [
+              IconCartMolecule(
+                  onClick: () => CustomRoute.navigate(
+                      context, ScreensItemModel.checkoutScreen),
+                  cartCount: mainScreenProvider.cartQuantity.toString())
+            ],
           ),
-          actions: [
-            IconCartMolecule(
-                onClick: () => CustomRoute.navigate(
-                    context, ScreensItemModel.checkoutScreen),
-                cartCount: provider.cartQuantity.toString())
-          ],
-        ),
-        bottomNavigationBar: SafeArea(
-          child: NavigationWidgetOrganism(
-              elevation: 0,
-              currentIndex: provider.currentPageIndex,
-              onTap: (index) => provider.setPageIndex(index),
-              items: const [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.home_rounded), label: 'Inicio'),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.amp_stories_rounded), label: 'Catálogo'),
-              ]),
-        ),
-        body: IndexedStack(
-          index: provider.currentPageIndex,
-          children: pageList,
-        ));
+          bottomNavigationBar: SafeArea(
+            child: NavigationWidgetOrganism(
+                elevation: 0,
+                currentIndex: mainScreenProvider.currentPageIndex,
+                onTap: (index) => mainScreenProvider.setPageIndex(index),
+                items: const [
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.home_rounded), label: 'Inicio'),
+                  BottomNavigationBarItem(
+                      icon: Icon(Icons.amp_stories_rounded), label: 'Catálogo'),
+                ]),
+          ),
+          body: IndexedStack(
+            index: mainScreenProvider.currentPageIndex,
+            children: pageList,
+          )),
+    );
   }
 }

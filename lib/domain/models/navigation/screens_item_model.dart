@@ -4,7 +4,6 @@ enum ScreensItemModel {
   checkoutScreen,
   detailScreen,
   loginScreen,
-  searchScreen,
   signUpScreen,
   supportScreen
 }

@@ -1,7 +1,11 @@
 import 'package:ecommerce_widgets_package/ecommerce_widgets_package.dart';
 import 'package:fake_store_app/config/navigation/custom_route.dart';
 import 'package:fake_store_app/domain/models/navigation/screens_item_model.dart';
+import 'package:fake_store_app/domain/provider/login_screen_provider.dart';
+import 'package:fake_store_app/domain/provider/main_screen_provider.dart';
+import 'package:fake_store_app/domain/provider/sign_up_screen_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
   const CustomDrawerWidget({super.key});
@@ -36,7 +40,12 @@ class CustomDrawerWidget extends StatelessWidget {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     onTap: () => CustomRoute.navigateAndRemoveUntil(
-                        context, ScreensItemModel.splashScreen)),
+                        context, ScreensItemModel.splashScreen,
+                        mainScreenProvider: context.read<MainScreenProvider>(),
+                        loginScreenProvider:
+                            context.read<LoginScreenProvider>(),
+                        signUpScreenProvider:
+                            context.read<SignUpScreenProvider>())),
               ),
             )
           ],
