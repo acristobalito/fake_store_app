@@ -62,19 +62,19 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "64e02bfb0fd4fdaefe31ce0e70fd96b17910ea10"
+      resolved-ref: d4bb8d70031f73a400a593e6e07cab35d646f4b8
       url: "https://github.com/acristobalito/ecommerce_widgets_package"
     source: git
-    version: "0.1.4"
+    version: "0.1.5"
   fake_api_source_package:
     dependency: "direct main"
     description:
       path: "."
       ref: master
-      resolved-ref: "59ce7d1317693eee750353322b022ff787249461"
+      resolved-ref: "67ecbc6c77e3bed3448d2fe2918a16a4b1dc990d"
       url: "https://github.com/acristobalito/fake_api_source_package"
     source: git
-    version: "0.0.5"
+    version: "0.0.6"
   fake_async:
     dependency: transitive
     description:
@@ -213,18 +213,18 @@ packages:
     dependency: "direct main"
     description:
       name: mocktail
-      sha256: c4b5007d91ca4f67256e720cb1b6d704e79a510183a12fa551021f652577dce6
+      sha256: "890df3f9688106f25755f26b1c60589a92b3ab91a22b8b224947ad041bf172d8"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.3"
+    version: "1.0.4"
   mocktail_image_network:
     dependency: "direct main"
     description:
       name: mocktail_image_network
-      sha256: "498726e24dd0aaf84329e6acf027549b292e9b782126f78406c25eeee70a0b9b"
+      sha256: a1fccbba780343517cfc552e0af2b3834d8bdb8f9f55a746c4d495ed1a8d50d6
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   nested:
     dependency: transitive
     description:
