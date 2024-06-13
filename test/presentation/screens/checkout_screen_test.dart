@@ -23,7 +23,7 @@ void main() {
         mockProductsRepository = MockProductsRepository();
       });
 
-      testWidgets('Test on empty order form should show empty screen',
+      testWidgets('Test on empty order form should show empty view',
           (tester) async {
         when(() => mockCartRepository.fetchOrderForm())
             .thenAnswer((_) async => null);
@@ -40,7 +40,8 @@ void main() {
             ),
           ], child: const MaterialApp(home: CheckoutScreen()))),
         );
-        expect(find.byType(EmptyBackgroundWidget), findsOneWidget);
+        expect(find.byType(EmptyBackgroundWidget), findsOneWidget,
+            reason: 'Should show Empty View');
       });
 
       testWidgets('Test add button', (tester) async {
@@ -70,7 +71,7 @@ void main() {
             of: find.byKey(const Key('QuantityProductCartText')).first,
             matching: find.byType(Text));
         final text = textQuantity.evaluate().single.widget as Text;
-        expect(text.data, '2');
+        expect(text.data, '2', reason: 'Text should be show 2');
       });
 
       testWidgets('Test substract button', (tester) async {
@@ -100,7 +101,7 @@ void main() {
             of: find.byKey(const Key('QuantityProductCartText')).first,
             matching: find.byType(Text));
         final text = textQuantity.evaluate().single.widget as Text;
-        expect(text.data, '1');
+        expect(text.data, '1', reason: 'Text should show 1');
       });
 
       testWidgets('Test remove button', (tester) async {
@@ -126,7 +127,8 @@ void main() {
         await tester
             .tap(find.byKey(const Key('RemoveProductCartButton')).first);
         await tester.pump();
-        expect(find.byType(EmptyBackgroundWidget), findsOneWidget);
+        expect(find.byType(EmptyBackgroundWidget), findsOneWidget,
+            reason: 'Should show empty view');
       });
     },
   );

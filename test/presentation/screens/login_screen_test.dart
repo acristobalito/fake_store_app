@@ -84,7 +84,7 @@ void main() {
         await tester.runAsync(() => tester.tap(find.byType(CustomButtonAtom)));
         await tester.pumpAndSettle(const Duration(seconds: 3));
         expect(find.byType(MainScreen), findsOneWidget,
-            reason: 'Encuentra main screen despues de navegar');
+            reason: 'Find main screen after navigate');
       },
     );
 
@@ -123,12 +123,11 @@ void main() {
         await tester.enterText(passwordFiel, 'abc');
         await tester.runAsync(() => tester.tap(find.byType(CustomButtonAtom)));
         await tester.pumpAndSettle(const Duration(seconds: 3));
-        expect(find.byType(SnackBar), findsOneWidget,
-            reason: 'Encuentra el snackbar');
+        expect(find.byType(SnackBar), findsOneWidget, reason: 'Find snackbar');
         await tester.tap(find.byType(SnackBarAction));
         await tester.pumpAndSettle();
         expect(find.byType(SnackBar), findsNothing,
-            reason: 'Verifica que el snackbar desaparece');
+            reason: 'Verify snackbar hide');
       },
     );
   });

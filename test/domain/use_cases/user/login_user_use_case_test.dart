@@ -17,29 +17,23 @@ void main() {
       registerFallbackValue(loginParamsModel);
     });
 
-    test('When invoke GetProductsUseCase and service fail should return null',
+    test('When invoke LoginUserUseCase and service fail should return null',
         () async {
-      // Arrange
       when(() => mockProductsRepository.loginUser(any())).thenAnswer(
         (_) async => null,
       );
-      // Act
       final idResponse = await useCase.invoke(loginParamsModel);
-      // Assert
-      expect(idResponse, isNull);
+      expect(idResponse, isNull, reason: 'Id user should be null');
     });
 
     test(
-        'When invoke GetProductsUseCase and service response should return valid list of categories',
+        'When invoke LoginUserUseCase and service response should return valid list of categories',
         () async {
-      // Arrange
       when(() => mockProductsRepository.loginUser(any())).thenAnswer(
         (_) async => '1',
       );
-      // Act
       final idResponse = await useCase.invoke(loginParamsModel);
-      // Assert
-      expect(idResponse, '1');
+      expect(idResponse, '1', reason: 'Id user should be a valid String');
     });
   });
 }

@@ -109,7 +109,7 @@ void main() {
         await tester.tap(button);
         await tester.pumpAndSettle();
         expect(find.byType(MainScreen), findsOneWidget,
-            reason: 'Encuentra main screen despues de navegar');
+            reason: 'Find main screen after navigate');
       },
     );
 
@@ -162,12 +162,11 @@ void main() {
         await tester.pumpAndSettle();
         await tester.tap(button);
         await tester.pumpAndSettle();
-        expect(find.byType(SnackBar), findsOneWidget,
-            reason: 'Encuentra el snackbar');
+        expect(find.byType(SnackBar), findsOneWidget, reason: 'Find snackbar');
         await tester.tap(find.byType(SnackBarAction));
         await tester.pumpAndSettle();
         expect(find.byType(SnackBar), findsNothing,
-            reason: 'Verifica que el snackbar desaparece');
+            reason: 'Verify snackbar hide');
       },
     );
   });

@@ -15,27 +15,21 @@ void main() {
 
     test('When invoke GetCategoriesUseCase and service fail should return null',
         () async {
-      // Arrange
       when(() => mockProductsRepository.getCategories()).thenAnswer(
         (_) async => null,
       );
-      // Act
       final categories = await useCase.invoke();
-      // Assert
-      expect(categories, isNull);
+      expect(categories, isNull, reason: 'Categories should be null');
     });
 
     test(
         'When invoke GetCategoriesUseCase and service response should return valid list of categories',
         () async {
-      // Arrange
       when(() => mockProductsRepository.getCategories()).thenAnswer(
         (_) async => ['1', '2', '3'],
       );
-      // Act
       final categories = await useCase.invoke();
-      // Assert
-      expect(categories, isNotNull);
+      expect(categories, isNotNull, reason: 'Categories should not be null');
     });
   });
 }

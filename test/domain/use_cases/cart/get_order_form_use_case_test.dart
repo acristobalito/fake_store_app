@@ -17,29 +17,23 @@ void main() {
     test(
         'When invoke GetOrderFormUseCase and shared preferences not exist return null',
         () async {
-      // Arrange
       when(() => mockCartRepository.fetchOrderForm()).thenAnswer(
         (_) async => null,
       );
-      // Act
       final orderForm = await useCase.invoke();
-      // Assert
-      expect(orderForm, isNull);
+      expect(orderForm, isNull, reason: 'OrderForm should be null');
     });
 
     test(
         'When invoke GetOrderFormUseCase and shared preferences exist return order form',
         () async {
-      // Arrange
       when(() => mockCartRepository.fetchOrderForm()).thenAnswer(
         (_) async => [
           CartAppModel(id: 1, image: '', nameProduct: '', price: 0, quantity: 1)
         ],
       );
-      // Act
       final orderForm = await useCase.invoke();
-      // Assert
-      expect(orderForm, isNotNull);
+      expect(orderForm, isNotNull, reason: 'OrderForm should not be null');
     });
   });
 }

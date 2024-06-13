@@ -28,29 +28,23 @@ void main() {
       registerFallbackValue(userModel);
     });
 
-    test('When invoke GetProductsUseCase and service fail should return null',
+    test('When invoke RegisterUserUseCase and service fail should return null',
         () async {
-      // Arrange
       when(() => mockProductsRepository.registerUser(any())).thenAnswer(
         (_) async => null,
       );
-      // Act
       final tokenResponse = await useCase.invoke(userModel);
-      // Assert
-      expect(tokenResponse, isNull);
+      expect(tokenResponse, isNull, reason: 'Token should be null');
     });
 
     test(
-        'When invoke GetProductsUseCase and service response should return valid list of categories',
+        'When invoke RegisterUserUseCase and service response should return valid list of categories',
         () async {
-      // Arrange
       when(() => mockProductsRepository.registerUser(any())).thenAnswer(
         (_) async => 1,
       );
-      // Act
       final tokenResponse = await useCase.invoke(userModel);
-      // Assert
-      expect(tokenResponse, 1);
+      expect(tokenResponse, 1, reason: 'Token should be valid');
     });
   });
 }

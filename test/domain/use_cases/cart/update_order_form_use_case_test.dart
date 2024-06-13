@@ -22,15 +22,12 @@ void main() {
     test(
         'When invoke UpdateOrderFormUseCase shared preferences should not null',
         () {
-      // Arrange
       bool isUpdatedOrderForm = false;
       when(() => mockCartRepository.updateOrderForm(any())).thenAnswer(
         (_) async => isUpdatedOrderForm = true,
       );
-      // Act
       useCase.invoke(cartAppModel);
-      // Assert
-      expect(isUpdatedOrderForm, true);
+      expect(isUpdatedOrderForm, true, reason: 'Should update order form');
     });
   });
 }

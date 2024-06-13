@@ -21,15 +21,12 @@ void main() {
     test(
         'When invoke AppendOrderFormUseCase shared preferences should not null',
         () {
-      // Arrange
       bool isAddedOrderForm = false;
       when(() => mockCartRepository.appendOrderForm(any())).thenAnswer(
         (_) async => isAddedOrderForm = true,
       );
-      // Act
       useCase.invoke(cartAppModel);
-      // Assert
-      expect(isAddedOrderForm, true);
+      expect(isAddedOrderForm, true, reason: 'Should added order form');
     });
   });
 }

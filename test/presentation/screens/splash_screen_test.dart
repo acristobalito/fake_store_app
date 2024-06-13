@@ -47,9 +47,10 @@ void main() {
             })),
           )));
       final logginButon = find.byType(CustomButtonAtom).first;
-      expect(logginButon, findsOneWidget);
+      expect(logginButon, findsOneWidget, reason: 'Loggin button should show');
       final signUpButton = find.byType(CustomButtonAtom).last;
-      expect(signUpButton, findsOneWidget);
+      expect(signUpButton, findsOneWidget,
+          reason: 'Sign Up button should show');
     });
 
     testWidgets('On tap login button should show Loggin Screen',
@@ -80,7 +81,8 @@ void main() {
       final logginButon = find.byType(CustomButtonAtom).first;
       await tester.tap(logginButon);
       await tester.pumpAndSettle();
-      expect(find.byType(LoginScreen), findsOneWidget);
+      expect(find.byType(LoginScreen), findsOneWidget,
+          reason: 'Login Screen should show');
     });
 
     testWidgets('On tap register button should show Sign Up Screen',
@@ -145,7 +147,8 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('LoginGoBackIconNavigation')));
       await tester.pumpAndSettle();
-      expect(find.text('Bienvenido...'), findsOneWidget);
+      expect(find.text('Bienvenido...'), findsOneWidget,
+          reason: 'Text should show');
     });
 
     testWidgets(
@@ -179,7 +182,8 @@ void main() {
       await tester.pumpAndSettle();
       await tester.tap(find.byKey(const Key('SignUpGoBackIconNavigation')));
       await tester.pumpAndSettle();
-      expect(find.text('Bienvenido...'), findsOneWidget);
+      expect(find.text('Bienvenido...'), findsOneWidget,
+          reason: 'Text should show');
     });
   });
 }
