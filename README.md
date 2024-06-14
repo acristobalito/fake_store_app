@@ -61,6 +61,9 @@ A continuación se menciona las 3 pantallas de la aplicación:
  	* __Cerrar sesión:__ Al interactuar con esta opciones, retornaremos a la vista del splash cerrando todas las vistas previas.
 
 **NOTA:** Los productos que se añaden al carrito, se almancenan en el dispositivo empleando la libreria de SharedPreferences codificando el objeto a una cadena de texto, y para leer la información decodificamos el string al modelo del carrito. El modelo empleado en el carrito es `List<CartAppModel>`.  
+  
+**Parametriazción:** El proyecto cuenta con un archivo `params.json` el cual se encuentra dentro del paquete `assets`. Este archivo JSON, tiene como finalidad definir atributos de los widgets del `Home Page` de la app. Podemos modificar el contenido de este archivo para personalizar directamente nuestros widgets. Por el momento solo podemos personalizar el color de las secciones de los productos recomendados y la nueva sección de productos, además podemos personalizar la visibilidad de la sección de deescuentos, podemos personalizar el titulo de ambas secciones de los productos, y adicional a ello podemos personalizar la categoria de la nueva sección que queremos mostrar, entre estos valores estan disponbiles las siguiente: "electronics",
+"jewelery","men's clothing","women's clothing"; si no se ingresa alguna de estas categorias, se usara la categoria "men's clothing" por defecto para mostrar los productos en esta nueva sección.
 
  ## Librerias
  A continuación se comparte las librerias empleadas:  
