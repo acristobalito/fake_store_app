@@ -7,6 +7,7 @@ El presente proyecto consume 2 paquetes publicados en GitHub:
 * [fake_api_source_package](https://github.com/acristobalito/fake_api_source_package), empleado para el consumo de la API [FakeStoreApi](https://fakestoreapi.com/)
   
 El proyecto ya cuenta con tests unitarios, widget tests y tests de integración. 🚀  
+  
 Con la reciente actualziación, el proyecto cuenta con parametrización desde un archivo JSON, y se incluyo la Accesibildiad empleando el widget **Semantics**. 🚹
 
 # Tabla de contenidos
