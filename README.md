@@ -7,15 +7,17 @@ El presente proyecto consume 2 paquetes publicados en GitHub:
 * [fake_api_source_package](https://github.com/acristobalito/fake_api_source_package), empleado para el consumo de la API [FakeStoreApi](https://fakestoreapi.com/)
   
 El proyecto ya cuenta con tests unitarios, widget tests y tests de integración. 🚀
+Con la reciente actualziación, el proyecto cuenta con parametrización desde un archivo JSON, y se incluyo la Accesibildiad empleando el widget **Semantics**. 🚹
 
 # Tabla de contenidos
 1. [Introducción](#introduction)
 2. [Agradecimientos](#thanks)
 3. [Requerimientos](#requeriments)
 4. [Documentación](#doc)
-5. [Librerias](#libraries)
-6. [Equipo de trabajo](#team)
-7. [Conclusiones](#end) 
+5. [Accesibilidad](#accesibility)
+6. [Librerias](#libraries)
+7. [Equipo de trabajo](#team)
+8. [Conclusiones](#end) 
 
 ## Introducción
 El proyecto desarrollado para dispisitivos móviles Android e iOS trata sobre una tienda online llamada Fake Store, el cual posee 8 vistas interesantes.  
@@ -64,6 +66,12 @@ A continuación se menciona las 3 pantallas de la aplicación:
   
 **Parametriazción:** El proyecto cuenta con un archivo `params.json` el cual se encuentra dentro del paquete `assets`. Este archivo JSON, tiene como finalidad definir atributos de los widgets del `Home Page` de la app. Podemos modificar el contenido de este archivo para personalizar directamente nuestros widgets. Por el momento solo podemos personalizar el color de las secciones de los productos recomendados y la nueva sección de productos, además podemos personalizar la visibilidad de la sección de deescuentos, podemos personalizar el titulo de ambas secciones de los productos, y adicional a ello podemos personalizar la categoria de la nueva sección que queremos mostrar, entre estos valores estan disponbiles las siguiente: "electronics",
 "jewelery","men's clothing","women's clothing"; si no se ingresa alguna de estas categorias, se usara la categoria "men's clothing" por defecto para mostrar los productos en esta nueva sección.
+
+## Accesibilidad
+Pensando en el uso accesible de la aplicación para las personas que sufren de algun tipo de discapacidad ya sea motriz, auditiva o visual. El proyecto cuenta con widgets reconocidos por los asistentes de voz, tanto de Android como iOS. Estos widgets solo se encuentran en las siguientes partes de la aplicación:
+  
+* __Splash Screen:__ En esta vista, el asistente de voz ha sido configurado a travéz del widget `Semantics` para reemplazar la etica `Bienvenido...` por el audio `Bienvenido`.
+* __Checkout Screen:__ En esta vista se ha ajustado el asistente de voz para que mencione la información del producto agregado al carrito, junto a su precio y su cantidad. En caso de que se seleccione alguno de los botones como el de agregar unidad, quitar unidad, y eliminar producto, el asistente reconocera estos iconos y describira la acción del botón al usuario. Mediante el empleo de `liveRegion` detectamos la reconstrucciónd el widget al interactuar con los botones, haciendo que el asistente vuelva a describir los widgets correspondientes. Si en caso no se cuenta con algun producto, el asistente mencionara que no se encuentra con productos en el carrito haciendo referencia a la vista de carrito vacío. Estos ajustes se implementaron en el paquete de widgets, debido a que desde la aplicación se llama directamente a estos.
 
  ## Librerias
  A continuación se comparte las librerias empleadas:  
