@@ -1,0 +1,15 @@
+{
+    "discountEnable" : false,
+    "recommendedSection": {
+        "title": "Recomendados para ti edición especial",
+        "titleColor" : "#eb4034",
+        "category" : "electronics",
+        "colorSection" : "#cceb34"
+    },
+    "newSection": {
+        "title": "Seccion especial no elegida",
+        "titleColor" : "#cceb34",
+        "category" : "jewelery",
+        "colorSection" : "#5934eb"
+    }
+}

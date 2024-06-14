@@ -1,4 +1,5 @@
 import 'package:fake_store_app/domain/models/cart/cart_app_model.dart';
+import 'package:fake_store_app/domain/models/parameterization/landing_parameterization_model.dart';
 import 'package:fake_store_app/domain/provider/checkout_screen_provider.dart';
 import 'package:fake_store_app/domain/provider/main_screen_provider.dart';
 import 'package:fake_store_app/presentation/screens/screens.dart';
@@ -10,6 +11,7 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:provider/provider.dart';
 
 import '../../mocks/mock_cart_repository.dart';
+import '../../mocks/mock_parametrization_repository.dart';
 import '../../mocks/mock_products_repository.dart';
 
 void main() {
@@ -18,15 +20,20 @@ void main() {
     () {
       late MockCartRepository mockCartRepository;
       late MockProductsRepository mockProductsRepository;
+      late MockParametrizationRepository mockParametrizationRepository;
       setUpAll(() {
         mockCartRepository = MockCartRepository();
         mockProductsRepository = MockProductsRepository();
+        mockParametrizationRepository = MockParametrizationRepository();
       });
 
       testWidgets('Test on empty order form should show empty view',
           (tester) async {
         when(() => mockCartRepository.fetchOrderForm())
             .thenAnswer((_) async => null);
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
         await mockNetworkImages(
           () async => await tester.pumpWidget(MultiProvider(providers: [
             ChangeNotifierProvider(
@@ -35,6 +42,7 @@ void main() {
             ),
             ChangeNotifierProvider(
               create: (_) => MainScreenProvider(
+                  parameterizationRepository: mockParametrizationRepository,
                   productsRepository: mockProductsRepository,
                   cartRepositoryImpl: mockCartRepository),
             ),
@@ -50,6 +58,9 @@ void main() {
               CartAppModel(
                   id: 1, image: '', nameProduct: '', price: 0, quantity: 1)
             ]);
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
         await mockNetworkImages(
           () async => await tester.pumpWidget(MultiProvider(providers: [
             ChangeNotifierProvider(
@@ -58,6 +69,7 @@ void main() {
             ),
             ChangeNotifierProvider(
               create: (_) => MainScreenProvider(
+                  parameterizationRepository: mockParametrizationRepository,
                   productsRepository: mockProductsRepository,
                   cartRepositoryImpl: mockCartRepository),
             ),
@@ -80,6 +92,9 @@ void main() {
               CartAppModel(
                   id: 1, image: '', nameProduct: '', price: 0, quantity: 2)
             ]);
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
         await mockNetworkImages(
           () async => await tester.pumpWidget(MultiProvider(providers: [
             ChangeNotifierProvider(
@@ -88,6 +103,7 @@ void main() {
             ),
             ChangeNotifierProvider(
               create: (_) => MainScreenProvider(
+                  parameterizationRepository: mockParametrizationRepository,
                   productsRepository: mockProductsRepository,
                   cartRepositoryImpl: mockCartRepository),
             ),
@@ -110,6 +126,9 @@ void main() {
               CartAppModel(
                   id: 1, image: '', nameProduct: '', price: 0, quantity: 2)
             ]);
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
         await mockNetworkImages(
           () async => await tester.pumpWidget(MultiProvider(providers: [
             ChangeNotifierProvider(
@@ -118,6 +137,7 @@ void main() {
             ),
             ChangeNotifierProvider(
               create: (_) => MainScreenProvider(
+                  parameterizationRepository: mockParametrizationRepository,
                   productsRepository: mockProductsRepository,
                   cartRepositoryImpl: mockCartRepository),
             ),

@@ -30,7 +30,7 @@ class GetProductsUseCase {
   }
 
   List<ProductModel> filterProductFromCategory(
-      List<ProductModel>? products, String category) {
+      List<ProductModel>? products, String? category) {
     if (products != null) {
       return switch (category) {
         'electronics' ||

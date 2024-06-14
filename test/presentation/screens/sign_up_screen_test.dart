@@ -1,5 +1,6 @@
 import 'package:fake_api_source_package/infrastructure/repositories/repositories.dart';
 import 'package:fake_store_app/domain/models/cart/cart_app_model.dart';
+import 'package:fake_store_app/domain/models/parameterization/landing_parameterization_model.dart';
 import 'package:fake_store_app/domain/provider/main_screen_provider.dart';
 import 'package:fake_store_app/domain/provider/sign_up_screen_provider.dart';
 import 'package:fake_store_app/presentation/screens/screens.dart';
@@ -10,18 +11,21 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:provider/provider.dart';
 
 import '../../mocks/mock_cart_repository.dart';
+import '../../mocks/mock_parametrization_repository.dart';
 import '../../mocks/mock_products_repository.dart';
 
 void main() {
   group('Sign up Screen Widget Test', () {
     late MockProductsRepository mockProductsRepository;
     late MockCartRepository mockCartRepository;
+    late MockParametrizationRepository mockParametrizationRepository;
     late UserModel userModel;
 
     setUpAll(
       () {
         mockProductsRepository = MockProductsRepository();
         mockCartRepository = MockCartRepository();
+        mockParametrizationRepository = MockParametrizationRepository();
         userModel = UserModel(
             email: '',
             username: '',
@@ -58,13 +62,15 @@ void main() {
         when(
           () => mockProductsRepository.getCategories(),
         ).thenAnswer((_) async => ['123', '124']);
-
         when(
           () => mockCartRepository.fetchOrderForm(),
         ).thenAnswer((_) async => [
               CartAppModel(
                   id: 0, image: '', nameProduct: '', price: 0, quantity: 1)
             ]);
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
         await mockNetworkImages(() async =>
             await tester.pumpWidget(MultiProvider(
               providers: [
@@ -74,6 +80,7 @@ void main() {
                 ),
                 ChangeNotifierProvider(
                   create: (_) => MainScreenProvider(
+                      parameterizationRepository: mockParametrizationRepository,
                       productsRepository: mockProductsRepository,
                       cartRepositoryImpl: mockCartRepository),
                 )
@@ -119,6 +126,9 @@ void main() {
         when(
           () => mockProductsRepository.registerUser(any()),
         ).thenAnswer((_) async => null);
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
         await mockNetworkImages(() async =>
             await tester.pumpWidget(MultiProvider(
               providers: [
@@ -128,6 +138,7 @@ void main() {
                 ),
                 ChangeNotifierProvider(
                   create: (_) => MainScreenProvider(
+                      parameterizationRepository: mockParametrizationRepository,
                       productsRepository: mockProductsRepository,
                       cartRepositoryImpl: mockCartRepository),
                 )

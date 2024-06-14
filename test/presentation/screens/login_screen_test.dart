@@ -1,6 +1,7 @@
 import 'package:ecommerce_widgets_package/ecommerce_widgets_package.dart';
 import 'package:fake_api_source_package/infrastructure/repositories/repositories.dart';
 import 'package:fake_store_app/domain/models/cart/cart_app_model.dart';
+import 'package:fake_store_app/domain/models/parameterization/landing_parameterization_model.dart';
 import 'package:fake_store_app/domain/provider/login_screen_provider.dart';
 import 'package:fake_store_app/domain/provider/main_screen_provider.dart';
 import 'package:fake_store_app/presentation/screens/screens.dart';
@@ -11,17 +12,20 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:provider/provider.dart';
 
 import '../../mocks/mock_cart_repository.dart';
+import '../../mocks/mock_parametrization_repository.dart';
 import '../../mocks/mock_products_repository.dart';
 
 void main() {
   group('Login Screen widget test', () {
     late MockProductsRepository mockProductsRepository;
     late MockCartRepository mockCartRepository;
+    late MockParametrizationRepository mockParametrizationRepository;
     late LoginParamsModel loginParamsModel;
 
     setUpAll(() {
       mockProductsRepository = MockProductsRepository();
       mockCartRepository = MockCartRepository();
+      mockParametrizationRepository = MockParametrizationRepository();
       loginParamsModel = LoginParamsModel(username: '123', password: '123');
       registerFallbackValue(loginParamsModel);
     });
@@ -47,36 +51,38 @@ void main() {
         when(
           () => mockProductsRepository.getCategories(),
         ).thenAnswer((_) async => ['123', '124']);
-
         when(
           () => mockCartRepository.fetchOrderForm(),
         ).thenAnswer((_) async => [
               CartAppModel(
                   id: 0, image: '', nameProduct: '', price: 0, quantity: 1)
             ]);
-
-        await mockNetworkImages(
-            () async => await tester.pumpWidget(MultiProvider(
-                  providers: [
-                    ChangeNotifierProvider(
-                      create: (_) => LoginScreenProvider(
-                          productsRepositoryImpl: mockProductsRepository),
-                    ),
-                    ChangeNotifierProvider(
-                      create: (_) => MainScreenProvider(
-                          productsRepository: mockProductsRepository,
-                          cartRepositoryImpl: mockCartRepository),
-                    )
-                  ],
-                  child: Builder(builder: (context) {
-                    return MaterialApp(
-                      home: LoginScreen(
-                        loginProvider: context.read<LoginScreenProvider>(),
-                        mainScreenProvider: context.read<MainScreenProvider>(),
-                      ),
-                    );
-                  }),
-                )));
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
+        await mockNetworkImages(() async =>
+            await tester.pumpWidget(MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  create: (_) => LoginScreenProvider(
+                      productsRepositoryImpl: mockProductsRepository),
+                ),
+                ChangeNotifierProvider(
+                  create: (_) => MainScreenProvider(
+                      parameterizationRepository: mockParametrizationRepository,
+                      productsRepository: mockProductsRepository,
+                      cartRepositoryImpl: mockCartRepository),
+                )
+              ],
+              child: Builder(builder: (context) {
+                return MaterialApp(
+                  home: LoginScreen(
+                    loginProvider: context.read<LoginScreenProvider>(),
+                    mainScreenProvider: context.read<MainScreenProvider>(),
+                  ),
+                );
+              }),
+            )));
         final userField = find.byType(TextFormField).at(0);
         final passwordFiel = find.byType(TextFormField).at(1);
         await tester.enterText(userField, '123');
@@ -94,29 +100,32 @@ void main() {
         when(
           () => mockProductsRepository.loginUser(any()),
         ).thenAnswer((_) async => null);
-
-        await mockNetworkImages(
-            () async => await tester.pumpWidget(MultiProvider(
-                  providers: [
-                    ChangeNotifierProvider(
-                      create: (_) => LoginScreenProvider(
-                          productsRepositoryImpl: mockProductsRepository),
-                    ),
-                    ChangeNotifierProvider(
-                      create: (_) => MainScreenProvider(
-                          productsRepository: mockProductsRepository,
-                          cartRepositoryImpl: mockCartRepository),
-                    )
-                  ],
-                  child: Builder(builder: (context) {
-                    return MaterialApp(
-                      home: LoginScreen(
-                        loginProvider: context.read<LoginScreenProvider>(),
-                        mainScreenProvider: context.read<MainScreenProvider>(),
-                      ),
-                    );
-                  }),
-                )));
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
+        await mockNetworkImages(() async =>
+            await tester.pumpWidget(MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  create: (_) => LoginScreenProvider(
+                      productsRepositoryImpl: mockProductsRepository),
+                ),
+                ChangeNotifierProvider(
+                  create: (_) => MainScreenProvider(
+                      parameterizationRepository: mockParametrizationRepository,
+                      productsRepository: mockProductsRepository,
+                      cartRepositoryImpl: mockCartRepository),
+                )
+              ],
+              child: Builder(builder: (context) {
+                return MaterialApp(
+                  home: LoginScreen(
+                    loginProvider: context.read<LoginScreenProvider>(),
+                    mainScreenProvider: context.read<MainScreenProvider>(),
+                  ),
+                );
+              }),
+            )));
         final userField = find.byType(TextFormField).at(0);
         final passwordFiel = find.byType(TextFormField).at(1);
         await tester.enterText(userField, '123');

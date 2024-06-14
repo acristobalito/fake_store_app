@@ -2,6 +2,7 @@ import 'package:ecommerce_widgets_package/ecommerce_widgets_package.dart';
 import 'package:fake_api_source_package/domain/model/product_model.dart';
 import 'package:fake_api_source_package/domain/model/rating_model.dart';
 import 'package:fake_store_app/domain/models/cart/cart_app_model.dart';
+import 'package:fake_store_app/domain/models/parameterization/landing_parameterization_model.dart';
 import 'package:fake_store_app/domain/provider/checkout_screen_provider.dart';
 import 'package:fake_store_app/domain/provider/detail_screen_provider.dart';
 import 'package:fake_store_app/domain/provider/login_screen_provider.dart';
@@ -15,15 +16,18 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:provider/provider.dart';
 
 import '../../mocks/mock_cart_repository.dart';
+import '../../mocks/mock_parametrization_repository.dart';
 import '../../mocks/mock_products_repository.dart';
 
 void main() {
   group('Main Screen Widget Test', () {
     late MockProductsRepository mockProductsRepository;
     late MockCartRepository mockCartRepository;
+    late MockParametrizationRepository mockParametrizationRepository;
     setUpAll(() {
       mockProductsRepository = MockProductsRepository();
       mockCartRepository = MockCartRepository();
+      mockParametrizationRepository = MockParametrizationRepository();
     });
     testWidgets(
         'On Click Product Detail from Recommended Section Should Show Detail Screen',
@@ -43,13 +47,15 @@ void main() {
       when(
         () => mockProductsRepository.getCategories(),
       ).thenAnswer((_) async => ['123', '124']);
-
       when(
         () => mockCartRepository.fetchOrderForm(),
       ).thenAnswer((_) async => [
             CartAppModel(
                 id: 0, image: '', nameProduct: '', price: 0, quantity: 1)
           ]);
+      when(() => mockParametrizationRepository.loadParametrization())
+          .thenAnswer(
+              (_) async => LandingParameterizationModel(discountEnable: true));
       await mockNetworkImages(() async => await tester.pumpWidget(MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -58,6 +64,7 @@ void main() {
               ),
               ChangeNotifierProvider(
                 create: (_) => MainScreenProvider(
+                    parameterizationRepository: mockParametrizationRepository,
                     productsRepository: mockProductsRepository,
                     cartRepositoryImpl: mockCartRepository),
               ),
@@ -77,7 +84,7 @@ void main() {
               );
             }),
           )));
-      await tester.pumpAndSettle(const Duration(seconds: 2));
+      await tester.pump(const Duration(seconds: 2));
       final scrollableFinder = find.descendant(
           of: find.byType(SingleChildScrollView),
           matching: find.byType(Scrollable).first);
@@ -123,6 +130,9 @@ void main() {
             CartAppModel(
                 id: 0, image: '', nameProduct: '', price: 0, quantity: 1)
           ]);
+      when(() => mockParametrizationRepository.loadParametrization())
+          .thenAnswer(
+              (_) async => LandingParameterizationModel(discountEnable: true));
       await mockNetworkImages(() async => await tester.pumpWidget(MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -131,6 +141,7 @@ void main() {
               ),
               ChangeNotifierProvider(
                 create: (_) => MainScreenProvider(
+                    parameterizationRepository: mockParametrizationRepository,
                     productsRepository: mockProductsRepository,
                     cartRepositoryImpl: mockCartRepository),
               ),
@@ -189,13 +200,15 @@ void main() {
       when(
         () => mockProductsRepository.getCategories(),
       ).thenAnswer((_) async => ['todas', 'jewelery', 'men\'s clothing']);
-
       when(
         () => mockCartRepository.fetchOrderForm(),
       ).thenAnswer((_) async => [
             CartAppModel(
                 id: 0, image: '', nameProduct: '', price: 0, quantity: 1)
           ]);
+      when(() => mockParametrizationRepository.loadParametrization())
+          .thenAnswer(
+              (_) async => LandingParameterizationModel(discountEnable: true));
       await mockNetworkImages(() async => await tester.pumpWidget(MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -204,6 +217,7 @@ void main() {
               ),
               ChangeNotifierProvider(
                 create: (_) => MainScreenProvider(
+                    parameterizationRepository: mockParametrizationRepository,
                     productsRepository: mockProductsRepository,
                     cartRepositoryImpl: mockCartRepository),
               ),
@@ -259,13 +273,15 @@ void main() {
       when(
         () => mockProductsRepository.getCategories(),
       ).thenAnswer((_) async => ['todas', 'jewelery', 'men\'s clothing']);
-
       when(
         () => mockCartRepository.fetchOrderForm(),
       ).thenAnswer((_) async => [
             CartAppModel(
                 id: 0, image: '', nameProduct: '', price: 0, quantity: 1)
           ]);
+      when(() => mockParametrizationRepository.loadParametrization())
+          .thenAnswer(
+              (_) async => LandingParameterizationModel(discountEnable: true));
       await mockNetworkImages(() async => await tester.pumpWidget(MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -274,6 +290,7 @@ void main() {
               ),
               ChangeNotifierProvider(
                 create: (_) => MainScreenProvider(
+                    parameterizationRepository: mockParametrizationRepository,
                     productsRepository: mockProductsRepository,
                     cartRepositoryImpl: mockCartRepository),
               ),
@@ -321,13 +338,15 @@ void main() {
       when(
         () => mockProductsRepository.getCategories(),
       ).thenAnswer((_) async => ['123', '124']);
-
       when(
         () => mockCartRepository.fetchOrderForm(),
       ).thenAnswer((_) async => [
             CartAppModel(
                 id: 0, image: '', nameProduct: '', price: 0, quantity: 1)
           ]);
+      when(() => mockParametrizationRepository.loadParametrization())
+          .thenAnswer(
+              (_) async => LandingParameterizationModel(discountEnable: true));
       await mockNetworkImages(() async => await tester.pumpWidget(MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -336,6 +355,7 @@ void main() {
               ),
               ChangeNotifierProvider(
                 create: (_) => MainScreenProvider(
+                    parameterizationRepository: mockParametrizationRepository,
                     productsRepository: mockProductsRepository,
                     cartRepositoryImpl: mockCartRepository),
               ),
@@ -378,13 +398,15 @@ void main() {
       when(
         () => mockProductsRepository.getCategories(),
       ).thenAnswer((_) async => ['123', '124']);
-
       when(
         () => mockCartRepository.fetchOrderForm(),
       ).thenAnswer((_) async => [
             CartAppModel(
                 id: 0, image: '', nameProduct: '', price: 0, quantity: 1)
           ]);
+      when(() => mockParametrizationRepository.loadParametrization())
+          .thenAnswer(
+              (_) async => LandingParameterizationModel(discountEnable: true));
       await mockNetworkImages(() async => await tester.pumpWidget(MultiProvider(
             providers: [
               ChangeNotifierProvider(
@@ -393,6 +415,7 @@ void main() {
               ),
               ChangeNotifierProvider(
                 create: (_) => MainScreenProvider(
+                    parameterizationRepository: mockParametrizationRepository,
                     productsRepository: mockProductsRepository,
                     cartRepositoryImpl: mockCartRepository),
               ),

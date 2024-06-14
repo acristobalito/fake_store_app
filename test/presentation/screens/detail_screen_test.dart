@@ -1,5 +1,6 @@
 import 'package:ecommerce_widgets_package/ecommerce_widgets_package.dart';
 import 'package:fake_store_app/domain/models/cart/cart_app_model.dart';
+import 'package:fake_store_app/domain/models/parameterization/landing_parameterization_model.dart';
 import 'package:fake_store_app/domain/provider/checkout_screen_provider.dart';
 import 'package:fake_store_app/domain/provider/detail_screen_provider.dart';
 import 'package:fake_store_app/domain/provider/main_screen_provider.dart';
@@ -11,16 +12,19 @@ import 'package:mocktail_image_network/mocktail_image_network.dart';
 import 'package:provider/provider.dart';
 
 import '../../mocks/mock_cart_repository.dart';
+import '../../mocks/mock_parametrization_repository.dart';
 import '../../mocks/mock_products_repository.dart';
 
 void main() {
   group('Detail Screen Test Widgets', () {
     late MockProductsRepository mockProductsRepository;
     late MockCartRepository mockCartRepository;
+    late MockParametrizationRepository mockParametrizationRepository;
     late CartAppModel cartAppModel;
     setUpAll(() {
       mockProductsRepository = MockProductsRepository();
       mockCartRepository = MockCartRepository();
+      mockParametrizationRepository = MockParametrizationRepository();
       cartAppModel = CartAppModel(
           id: 1, image: '', nameProduct: '', price: 100, quantity: 0);
       registerFallbackValue(cartAppModel);
@@ -34,6 +38,9 @@ void main() {
             .thenAnswer((_) async => null);
         when(() => mockCartRepository.appendOrderForm(any()))
             .thenAnswer((_) async => isProductAdded = true);
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
         final product = ProductWidgetModel(
             id: 2,
             title: 'Prueba 2',
@@ -51,6 +58,7 @@ void main() {
                 ),
                 ChangeNotifierProvider(
                   create: (_) => MainScreenProvider(
+                      parameterizationRepository: mockParametrizationRepository,
                       productsRepository: mockProductsRepository,
                       cartRepositoryImpl: mockCartRepository),
                 ),
@@ -86,6 +94,9 @@ void main() {
             ]);
         when(() => mockCartRepository.appendOrderForm(any()))
             .thenAnswer((_) async => isProductAdded = true);
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
         final product = ProductWidgetModel(
             id: 2,
             title: 'Prueba 2',
@@ -103,6 +114,7 @@ void main() {
                 ),
                 ChangeNotifierProvider(
                   create: (_) => MainScreenProvider(
+                      parameterizationRepository: mockParametrizationRepository,
                       productsRepository: mockProductsRepository,
                       cartRepositoryImpl: mockCartRepository),
                 ),
@@ -135,6 +147,9 @@ void main() {
                   price: 100,
                   quantity: 1)
             ]);
+        when(() => mockParametrizationRepository.loadParametrization())
+            .thenAnswer((_) async =>
+                LandingParameterizationModel(discountEnable: true));
         final product = ProductWidgetModel(
             id: 2,
             title: 'Prueba 2',
@@ -152,6 +167,7 @@ void main() {
                 ),
                 ChangeNotifierProvider(
                   create: (_) => MainScreenProvider(
+                      parameterizationRepository: mockParametrizationRepository,
                       productsRepository: mockProductsRepository,
                       cartRepositoryImpl: mockCartRepository),
                 ),
