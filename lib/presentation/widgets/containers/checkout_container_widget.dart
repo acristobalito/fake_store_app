@@ -32,30 +32,36 @@ class CheckoutContainerWidget extends StatelessWidget {
           centerTitle: true,
         ),
         body: Consumer<CheckoutScreenProvider>(
-          builder: (context, _, child) => SafeArea(
-            child: ((provider.products ?? []).isNotEmpty)
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: CartViewWidgetTemplate(
-                      cartList: ProductAppWidgetModelMapper.mapProductsModel(
-                          provider.products),
-                      onAddQuantity: (product) =>
-                          provider.addUnitsProduct(product),
-                      onSubstractQuantity: (product) =>
-                          provider.substractUnitsProducts(product),
-                      onClickBuyNow: () {
-                        provider.removeOrderForm();
-                        toastController.showToast('Gracias por tu compra');
-                      },
-                      onRemove: (product) => provider.removeProduct(product),
-                      priceTotal: provider.total,
-                      txtStyle: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  )
-                : const EmptyBackgroundWidget(),
+          builder: (context, _, child) => Semantics(
+            liveRegion: true,
+            child: SafeArea(
+              child: ((provider.products ?? []).isNotEmpty)
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: CartViewWidgetTemplate(
+                        cartList: ProductAppWidgetModelMapper.mapProductsModel(
+                            provider.products),
+                        onAddQuantity: (product) =>
+                            provider.addUnitsProduct(product),
+                        onSubstractQuantity: (product) =>
+                            provider.substractUnitsProducts(product),
+                        onClickBuyNow: () {
+                          provider.removeOrderForm();
+                          toastController.showToast('Gracias por tu compra');
+                        },
+                        onRemove: (product) => provider.removeProduct(product),
+                        priceTotal: provider.total,
+                        txtStyle: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    )
+                  : Semantics(
+                      label: 'No tienes productos en el carrito',
+                      excludeSemantics: true,
+                      child: const EmptyBackgroundWidget()),
+            ),
           ),
         ),
       ),

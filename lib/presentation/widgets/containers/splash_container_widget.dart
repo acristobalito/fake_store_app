@@ -24,22 +24,26 @@ class SplashContainerWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const Align(
+            Align(
               alignment: Alignment.centerLeft,
-              child: CustomTextAtom(
-                lines: 2,
-                text: 'Bienvenido...',
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: TokenColors.scale01),
+              child: Semantics(
+                label: 'Bienvenido',
+                excludeSemantics: true,
+                child: const CustomTextAtom(
+                  lines: 2,
+                  text: 'Bienvenido...',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: TokenColors.scale01),
+                ),
               ),
             ),
             const Align(
               alignment: Alignment.centerLeft,
               child: CustomTextAtom(
                 lines: 2,
-                text: '¿Listo para para una experiencia interesate?',
+                text: '¿Listo para una experiencia interesate?',
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,

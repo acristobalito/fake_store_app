@@ -62,10 +62,10 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: d4bb8d70031f73a400a593e6e07cab35d646f4b8
+      resolved-ref: "8e5bc22cce1f474df0c4c4c3253c3f3b94d86bf2"
       url: "https://github.com/acristobalito/ecommerce_widgets_package"
     source: git
-    version: "0.1.5"
+    version: "0.1.10"
   fake_api_source_package:
     dependency: "direct main"
     description:
